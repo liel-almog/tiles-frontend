@@ -9,7 +9,6 @@ export interface LoginProps {}
 export const Login: React.VFC<LoginProps> = () => {
   const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
-  console.log("on login page");
 
   useEffect(() => {
     if (authCtx.isLoggedIn) {
@@ -37,6 +36,8 @@ export const Login: React.VFC<LoginProps> = () => {
           id="email"
           className={classes.input}
           placeholder="Email"
+          value={formik.values.email}
+          onChange={formik.handleChange}
         />
       </section>
       <section className={classes.formGroup}>
@@ -46,6 +47,8 @@ export const Login: React.VFC<LoginProps> = () => {
           id="password"
           className={classes.input}
           placeholder="Password"
+          value={formik.values.password}
+          onChange={formik.handleChange}
         />
       </section>
 

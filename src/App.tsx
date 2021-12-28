@@ -8,7 +8,6 @@ import "./App.scss";
 function App() {
   const authCtx = useContext(AuthContext);  
   const navigate = useNavigate();
-  console.log("on home page");
   
   useEffect(() => {
     if (!authCtx.isLoggedIn) {

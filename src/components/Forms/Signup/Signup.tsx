@@ -20,7 +20,7 @@ export const Signup: React.VFC<SignupProps> = () => {
         const res = await signup(values);
         navigate("/login");
       } catch (error: any) {
-        throw new Error("Could not log you in");
+        throw new Error("Could not sign you up");
       }
     },
   });
@@ -31,10 +31,12 @@ export const Signup: React.VFC<SignupProps> = () => {
       <section className={classes.formGroup}>
         <input
           type="text"
-          name="firstname"
-          id="firstname"
+          name="name"
+          id="name"
           className={classes.input}
           placeholder="Name"
+          value={formik.values.name}
+          onChange={formik.handleChange}
         />
       </section>
 
@@ -45,6 +47,8 @@ export const Signup: React.VFC<SignupProps> = () => {
           id="email"
           className={classes.input}
           placeholder="Email"
+          value={formik.values.email}
+          onChange={formik.handleChange}
         />
       </section>
       <section className={classes.formGroup}>
@@ -54,6 +58,8 @@ export const Signup: React.VFC<SignupProps> = () => {
           id="password"
           className={classes.input}
           placeholder="Password"
+          value={formik.values.password}
+          onChange={formik.handleChange}
         />
       </section>
 

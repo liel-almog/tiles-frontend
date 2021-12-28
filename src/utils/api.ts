@@ -13,7 +13,7 @@ const defaultApi = "http://localhost:8080";
 
 const login = async (values: Login) => {
   try {
-    const res = await axios.post(`${defaultApi}/login`, values);
+    const res = await axios.post(`${defaultApi}/auth/login`, values);
     return res;
   } catch (error: any) {
     console.log(error.message);
@@ -22,10 +22,11 @@ const login = async (values: Login) => {
 
 const signup = async (values: Signup) => {
   try {
-    const res = await axios.post(`${defaultApi}/signup`, values);
+    const res = await axios.post(`${defaultApi}/auth/signup`, values);
     return res;
   } catch (error: any) {
     console.log(error.message);
+    throw new Error("Could not create user");
   }
 };
 
