@@ -1,12 +1,21 @@
 import { Outlet } from "react-router-dom";
+import { Navbar } from "./components/Navbar";
+import { Footer } from "./components/Footer";
 import "./App.scss";
 
 function App() {
   return (
-    <main className="container">
-      <h1>Hello World</h1>
-      <Outlet></Outlet>
-    </main>
+    <>
+      <header className="navbar">
+        <Navbar />
+      </header>
+      <main className="container">
+        <Outlet></Outlet>
+      </main>
+      <footer className="footer">
+        <Footer />
+      </footer>
+    </>
   );
 }
 

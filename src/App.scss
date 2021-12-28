@@ -1,18 +1,62 @@
 body {
   height: 100vh;
-  background: #ECF4FF;
+  background: #ecf4ff;
+  font-family: Roboto, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+
+// #root {
+//   height: 100%;
+//   display: flex;
+//   justify-content: center;
+// }
 
 #root {
   height: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   height: 100%;
   width: 80%;
+}
+
+.navbar,
+.footer {
+  background-color: #90aacb;
+}
+
+.navbar {
+  padding-left: 2rem;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  justify-content: start;
+}
+
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+input {
+  border: none;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  color: inherit;
 }
