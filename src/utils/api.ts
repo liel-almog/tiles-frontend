@@ -1,17 +1,17 @@
 import axios, { AxiosInstance } from "axios";
 
-interface login {
+export interface Login {
   email: string;
   password: string;
 }
 
-interface signup extends login {
+export interface Signup extends Login {
   name: string;
 }
 
 const defaultApi = "http://localhost:8080";
 
-const login = async (values: login) => {
+const login = async (values: Login) => {
   try {
     const res = await axios.post(`${defaultApi}/login`, values);
     return res;
@@ -20,7 +20,7 @@ const login = async (values: login) => {
   }
 };
 
-const signup = async (values: signup) => {
+const signup = async (values: Signup) => {
   try {
     const res = await axios.post(`${defaultApi}/signup`, values);
     return res;

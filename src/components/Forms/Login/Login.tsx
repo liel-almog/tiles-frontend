@@ -1,12 +1,21 @@
-import { useFormik } from "formik";
+import { useContext, useEffect } from "react";
 import classes from "./login.module.scss";
-import { login } from "../../../utils/api";
+import { useFormik } from "formik";
 import { Link, useNavigate } from "react-router-dom";
+import AuthContext from "../../../contexts/auth-context";
 
 export interface LoginProps {}
 
 export const Login: React.VFC<LoginProps> = () => {
+  const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
+  console.log("on login page");
+
+  useEffect(() => {
+    if (authCtx.isLoggedIn) {
+      navigate("/");
+    }
+  }, [authCtx.isLoggedIn]);
 
   const formik = useFormik({
     initialValues: {
@@ -14,14 +23,7 @@ export const Login: React.VFC<LoginProps> = () => {
       password: "",
     },
 
-    onSubmit: async (values) => {
-      try {
-        const res = await login(values);
-        navigate("/");
-      } catch (error: any) {
-        throw new Error("Could not log you in");
-      }
-    },
+    onSubmit: authCtx.onLogin,
   });
   return (
     <form onSubmit={formik.handleSubmit} className={classes.form}>
