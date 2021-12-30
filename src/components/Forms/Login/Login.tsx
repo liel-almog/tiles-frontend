@@ -1,8 +1,10 @@
-import { useContext, useEffect } from "react";
 import classes from "./login.module.scss";
+import { LoginSchema } from "./validation";
+import { useContext, useEffect } from "react";
 import { useFormik } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../../../contexts/auth-context";
+import classNames from "classnames";
 
 export interface LoginProps {}
 
@@ -23,7 +25,14 @@ export const Login: React.VFC<LoginProps> = () => {
     },
 
     onSubmit: authCtx.onLogin,
+    validationSchema: LoginSchema
   });
+
+  const validation = {
+    email: formik.errors.email && formik.touched.email,
+    password: formik.errors.password && formik.touched.password,
+  };
+
   return (
     <form onSubmit={formik.handleSubmit} className={classes.form}>
       <img src="/src/public/user.svg" alt="profile image" />
@@ -34,10 +43,11 @@ export const Login: React.VFC<LoginProps> = () => {
           type="email"
           name="email"
           id="email"
-          className={classes.input}
+          className={classNames(classes.input, {[classes.error]: validation.email})}
           placeholder="Email"
           value={formik.values.email}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
         />
       </section>
       <section className={classes.formGroup}>
@@ -45,10 +55,11 @@ export const Login: React.VFC<LoginProps> = () => {
           type="password"
           name="password"
           id="password"
-          className={classes.input}
+          className={classNames(classes.input, {[classes.error]: validation.password})}
           placeholder="Password"
           value={formik.values.password}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
         />
       </section>
 

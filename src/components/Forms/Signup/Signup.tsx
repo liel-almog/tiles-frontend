@@ -1,12 +1,14 @@
 import classes from "./signup.module.scss";
+import classNames from 'classnames'
 import { signup } from "../../../utils/api";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
+import { SignupSchema } from "./validation";
 
 export interface SignupProps {}
 
 export const Signup: React.VFC<SignupProps> = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -14,6 +16,7 @@ export const Signup: React.VFC<SignupProps> = () => {
       email: "",
       password: "",
     },
+    validationSchema: SignupSchema,
 
     onSubmit: async (values) => {
       try {
@@ -24,8 +27,15 @@ export const Signup: React.VFC<SignupProps> = () => {
       }
     },
   });
+
+  const validation = {
+    email: formik.errors.email && formik.touched.email,
+    password: formik.errors.password && formik.touched.password,
+    name: formik.errors.name && formik.touched.name,
+  };
+
   return (
-    <form onSubmit={formik.handleSubmit} className={classes.form}>
+    <form onSubmit={formik.handleSubmit} className={classes.form} noValidate>
       <img src="/src/public/user.svg" alt="profile image" />
       <h1>Signup</h1>
       <section className={classes.formGroup}>
@@ -33,10 +43,11 @@ export const Signup: React.VFC<SignupProps> = () => {
           type="text"
           name="name"
           id="name"
-          className={classes.input}
+          className={classNames(classes.input, {[classes.error]: validation.name})}
           placeholder="Name"
           value={formik.values.name}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
         />
       </section>
 
@@ -45,10 +56,11 @@ export const Signup: React.VFC<SignupProps> = () => {
           type="email"
           name="email"
           id="email"
-          className={classes.input}
+          className={classNames(classes.input, {[classes.error]: validation.email})}
           placeholder="Email"
           value={formik.values.email}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
         />
       </section>
       <section className={classes.formGroup}>
@@ -56,10 +68,11 @@ export const Signup: React.VFC<SignupProps> = () => {
           type="password"
           name="password"
           id="password"
-          className={classes.input}
+          className={classNames(classes.input, {[classes.error]: validation.password})}
           placeholder="Password"
           value={formik.values.password}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
         />
       </section>
 
