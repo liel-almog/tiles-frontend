@@ -1,11 +1,18 @@
+import { AxiosResponse } from "axios";
 import React, { useState, useEffect } from "react";
 import { login, Login } from "../utils/api";
 import { useLocalStorage } from "../utils/localStorage";
 
-const AuthContext = React.createContext({
+interface AuthContextArgs {
+  isLoggedIn: boolean;
+  onLogout: () => void;
+  onLogin: (v: Login) => Promise<string>;
+}
+
+const AuthContext = React.createContext<AuthContextArgs>({
   isLoggedIn: false,
   onLogout: () => {},
-  onLogin: (values: Login) => {},
+  onLogin: (values) => new Promise((res, rej) => res('')),
 });
 
 interface AuthContextProviderProps {}
@@ -13,29 +20,25 @@ interface AuthContextProviderProps {}
 export const AuthContextProvider: React.FC<AuthContextProviderProps> = (
   props
 ) => {
-  const loggedInUser = Boolean(localStorage.getItem("isLoggedIn"));
-  const [isLoggedIn, setIsLoggedIn] = useState(loggedInUser || false);
-
-  useEffect(() => {
-    const loggedInUser = Boolean(localStorage.getItem("isLoggedIn"));
-
-    if (loggedInUser) {
-      setIsLoggedIn(true);
-    }
-  }, []);
+  const [isLoggedIn, setIsLoggedIn] = useLocalStorage("isLoggedIn", false);
+  const [_userId, setUserId] = useLocalStorage("userId", "");
 
   const logoutHandler = () => {
-    localStorage.removeItem("isLoggedIn");
+    setUserId("");
     setIsLoggedIn(false);
   };
 
   const loginHandler = async (values: Login) => {
     try {
-      const res = await login(values);
-      localStorage.setItem("isLoggedIn", "true");
+      const res: AxiosResponse<{ id: string; message: string }> = await login(
+        values
+      );
+      const { id, message } = res.data;
+      setUserId(id);
       setIsLoggedIn(true);
+      return message;
     } catch (error: any) {
-      throw new Error("Could not log you in");
+      throw new Error(error.message);
     }
   };
 
