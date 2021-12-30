@@ -1,10 +1,13 @@
-import classes from './footer.module.scss';
+import classNames from "classnames";
+import classes from "./footer.module.scss";
 
 export interface FooterProps {}
 
 export const Footer: React.VFC<FooterProps> = () => {
-	
-	return (
-		<article><h1>Footer</h1></article>
-	);
+  return (
+    <article className={classes.btnGroup}>
+      <button>Undo</button>
+      <button className={classNames(classes.save)}>Save</button>
+    </article>
+  );
 };

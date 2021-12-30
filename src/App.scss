@@ -16,6 +16,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: #ECF4FF;
 }
 
 .container {
@@ -25,27 +26,23 @@ body {
   justify-content: center;
   height: 100%;
   width: 80%;
+  color: #ecf4ff;
 }
 
 .navbar,
 .footer {
   background-color: #90aacb;
+  height: 8%;
+  width: 100%;
+  display: flex;
 }
 
 .navbar {
-  padding-left: 2rem;
-  box-sizing: border-box;
-  width: 100%;
-  display: flex;
   justify-content: start;
 }
 
 .footer {
-  width: 100%;
-  display: flex;
   justify-content: end;
-  box-sizing: border-box;
-  padding-right: 2rem;
 }
 
 a {

@@ -1,0 +1,16 @@
+.btnGroup {
+  height: 100%;
+
+  & button {
+    height: 100%;
+    background-color: inherit;
+    padding: 0rem 3rem;
+    box-sizing: border-box;
+    font-size: x-large;
+    font-weight: bold;
+  }
+
+  .save {
+    background-color: #607998;
+  }
+}
