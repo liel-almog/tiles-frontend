@@ -4,19 +4,12 @@ body {
   font-family: Roboto, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-// #root {
-//   height: 100%;
-//   display: flex;
-//   justify-content: center;
-// }
-
 #root {
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: #ECF4FF;
 }
 
 .container {
@@ -26,7 +19,6 @@ body {
   justify-content: center;
   height: 100%;
   width: 80%;
-  color: #ecf4ff;
 }
 
 .navbar,
@@ -35,6 +27,7 @@ body {
   height: 8%;
   width: 100%;
   display: flex;
+  color: #ecf4ff;
 }
 
 .navbar {
@@ -58,4 +51,5 @@ button {
   border: none;
   cursor: pointer;
   color: inherit;
+  background-color: transparent;
 }

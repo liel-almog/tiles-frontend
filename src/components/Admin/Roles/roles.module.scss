@@ -1,0 +1,38 @@
+h1 {
+  margin: 0;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: flex-start;
+  width: 80%;
+
+  .header {
+    color: #607998;
+    font-size: xx-large;
+    border-bottom: 3px solid #ecf4ff;
+    padding-bottom: 1rem;
+    box-sizing: border-box;
+    width: 100%;
+    background-color: transparent;
+    font-weight: 500;
+  }
+
+  .roles {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    padding-top: 1rem;
+    box-sizing: border-box;
+    color: #ecf4ff;
+  }
+
+  .role {
+      background-color: transparent;
+      font-size: xx-large;
+      text-align: left;
+      font-weight: 500;
+    }
+}

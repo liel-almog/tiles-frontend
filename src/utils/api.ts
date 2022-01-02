@@ -1,4 +1,6 @@
-import axios, { AxiosInstance } from "axios";
+import axios, { AxiosInstance, AxiosResponse } from "axios";
+import { searchRoles } from "../components/Admin";
+import { User } from "../types/interface.user";
 
 export interface Login {
   email: string;
@@ -41,4 +43,8 @@ const signup = async (values: Signup) => {
   }
 };
 
-export { login, signup };
+const users = {
+  getByRole: (async (role: searchRoles) => await (await axios.get(`${defaultApi}/user/${role}`)).data as User[])
+};
+
+export { login, signup, users };
