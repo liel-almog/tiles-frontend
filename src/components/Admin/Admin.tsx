@@ -14,7 +14,7 @@ export const Admin: React.VFC<AdminProps> = () => {
   return (
     <div className={classes.row}>
       <section className={classes.userRoles}>
-        <Roles setRole={setRole}></Roles>
+        <Roles role={role} setRole={setRole}></Roles>
       </section>
       <section className={classes.users}>
         <Table role={role} />

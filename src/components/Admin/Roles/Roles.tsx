@@ -1,9 +1,11 @@
 import classes from "./roles.module.scss";
 import { Role } from "../../../types/enum.role";
 import { searchRoles } from "../Admin";
+import classNames from "classnames";
 
 export interface RolesProps {
   setRole: React.Dispatch<React.SetStateAction<searchRoles>>;
+  role: searchRoles;
 }
 
 export const Roles: React.VFC<RolesProps> = (props) => {
@@ -14,9 +16,13 @@ export const Roles: React.VFC<RolesProps> = (props) => {
     props.setRole(role);
   };
 
+  const active = (role: searchRoles) => {
+    return role === props.role ? classes.isActive : '';
+  };
+
   const roles = Object.values(Role).map((role) => (
     <button
-      className={classes.role}
+      className={classNames(classes.role, active(role))}
       value={role}
       onClick={handleRoleClick}
       key={role}
@@ -27,8 +33,14 @@ export const Roles: React.VFC<RolesProps> = (props) => {
 
   return (
     <div className={classes.col}>
-      <article >
-        <button className={classes.header} value={'All'} onClick={handleRoleClick}>All Users</button>
+      <article>
+        <button
+          className={classNames(classes.header, active("All"))}
+          value={"All"}
+          onClick={handleRoleClick}
+        >
+          All Users
+        </button>
       </article>
       <article className={classes.roles}>{roles}</article>
     </div>

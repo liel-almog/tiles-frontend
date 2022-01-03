@@ -10,14 +10,17 @@ h1 {
   width: 80%;
 
   .header {
-    color: #607998;
+    color: #ecf4ff;
     font-size: xx-large;
-    border-bottom: 3px solid #ecf4ff;
-    padding-bottom: 1rem;
     box-sizing: border-box;
     width: 100%;
     background-color: transparent;
     font-weight: 500;
+  }
+
+  .isActive {
+    color: #607998;
+    border-bottom: 3px solid #ecf4ff;
   }
 
   .roles {
@@ -30,9 +33,9 @@ h1 {
   }
 
   .role {
-      background-color: transparent;
-      font-size: xx-large;
-      text-align: left;
-      font-weight: 500;
-    }
+    background-color: transparent;
+    font-size: xx-large;
+    text-align: left;
+    font-weight: 500;
+  }
 }
