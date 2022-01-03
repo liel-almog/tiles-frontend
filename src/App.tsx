@@ -3,16 +3,23 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import AuthContext from "./contexts/auth-context";
+import { TilesContextProvider } from "./contexts/tiles-context";
+import { UsersContextProvider } from "./contexts/users-context";
+import { combineComponents } from "./utils/CombineComponents";
 import "./App.scss";
+import { Role } from "./types/enum.role";
 
 function App() {
-  const authCtx = useContext(AuthContext);  
+  const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
-  
+  const AppContextProvider = combineComponents(
+    UsersContextProvider,
+    TilesContextProvider
+  );
+
   useEffect(() => {
     if (!authCtx.isLoggedIn) {
-      navigate('/login')
-
+      navigate("/login");
     }
   }, [authCtx.isLoggedIn]);
 
@@ -21,12 +28,16 @@ function App() {
       <header className="navbar">
         <Navbar />
       </header>
-      <main className="container">
-        <Outlet></Outlet>
-      </main>
-      <footer className="footer">
-        <Footer />
-      </footer>
+      <AppContextProvider>
+        <main className="container">
+          <Outlet></Outlet>
+        </main>
+        {authCtx.user.role !== Role.Viewer && (
+          <footer className="footer">
+            <Footer />
+          </footer>
+        )}
+      </AppContextProvider>
     </>
   );
 }
