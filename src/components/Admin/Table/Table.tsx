@@ -2,9 +2,10 @@ import { useEffect, useMemo, useState } from "react";
 import { searchRoles } from "..";
 import { Role } from "../../../types/enum.role";
 import { User } from "../../../types/interface.user";
-import * as api from "../../../utils/api";
+import {users as usersApi} from "../../../utils/api";
 import { UsersList } from "./UsersList";
 import classes from "./table.module.scss";
+import UsersContext from '../../../contexts/users-context'
 
 export interface TableProps {
   role: searchRoles;
@@ -21,7 +22,7 @@ export const Table: React.VFC<TableProps> = (props) => {
 
   useEffect(() => {
     (async () => {
-      setUsers(await api.users.getByRole(role));
+      setUsers(await usersApi.getByRole(role));
     })();
   }, [role]);
 
