@@ -11,7 +11,7 @@ export const Navbar: React.VFC<NavbarProps> = () => {
   const { user } = useContext(AuthContext);
   const { onLogout } = useContext(AuthContext);
 
-  const active = ({ isActive }: { isActive: boolean }) =>
+  const navClasses = ({ isActive }: { isActive: boolean }) =>
     `${isActive ? classes.active : ""} ${classes.vertical}`;
 
   return (
@@ -26,10 +26,10 @@ export const Navbar: React.VFC<NavbarProps> = () => {
 
       {user.role === "Admin" && (
         <section className={classes.links}>
-          <NavLink className={active} to="/">
+          <NavLink className={navClasses} to="/">
             <img src="/src/public/tile-managment.svg" alt="tile management" />
           </NavLink>
-          <NavLink className={active} to="/admin">
+          <NavLink className={navClasses} to="/admin">
             <img src="/src/public/admin-page.svg" alt="admin management" />
           </NavLink>
         </section>
