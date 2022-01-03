@@ -44,7 +44,7 @@ const signup = async (values: Signup) => {
 };
 
 const users = {
-  getByRole: (async (role: searchRoles) => await (await axios.get(`${defaultApi}/user/${role}`)).data as User[])
+  getByRole: (async (role: searchRoles) => await (await axios.get(`${defaultApi}/user/role/${role}`)).data as User[])
 };
 
 export { login, signup, users };
