@@ -17,18 +17,19 @@ export const Roles: React.VFC<RolesProps> = (props) => {
   };
 
   const active = (role: searchRoles) => {
-    return role === props.role ? classes.isActive : '';
+    return role === props.role ? classes.isActive : "";
   };
 
   const roles = Object.values(Role).map((role) => (
-    <button
-      className={classNames(classes.role, active(role))}
-      value={role}
-      onClick={handleRoleClick}
-      key={role}
-    >
-      {role + "s"}
-    </button>
+    <div key={role}>
+      <button
+        className={classNames(classes.role, active(role))}
+        value={role}
+        onClick={handleRoleClick}
+      >
+        {role + "s"}
+      </button>
+    </div>
   ));
 
   return (
