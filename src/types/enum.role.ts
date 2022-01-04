@@ -5,7 +5,7 @@ export enum Role {
   Viewer = "Viewer",
 }
 
-enum NRole {
+export enum NRole {
   Admin,
   Moderator,
   Editor,

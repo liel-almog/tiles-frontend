@@ -1,3 +1,4 @@
 export interface Tile {
-    color: string
+  _id?: string;
+  color: string;
 }
