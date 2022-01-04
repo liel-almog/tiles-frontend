@@ -1,13 +1,15 @@
-import { useMemo } from "react";
+import { useContext, useMemo } from "react";
 import { Role } from "../../../../types/enum.role";
-import { User } from "../../../../types/interface.user";
+import { User, userDetails } from "../../../../types/interface.user";
 import classes from "./users-list.module.scss";
-
+import UsersContext from "../../../../contexts/changed-users-context";
 export interface UsersListProps {
   users: User[] | undefined;
 }
 
 export const UsersList: React.VFC<UsersListProps> = ({ users }) => {
+  const changedUsersCtx = useContext(UsersContext);
+
   const roles = Object.values(Role).map((role) => (
     <option value={role} key={role}>
       {role}
@@ -16,24 +18,30 @@ export const UsersList: React.VFC<UsersListProps> = ({ users }) => {
 
   const handleRoleChange = (
     e: React.ChangeEvent<HTMLSelectElement>,
-    role: Role
+    userDetails: userDetails
   ) => {
-    console.log("Changed", e.target.value);
-    console.log("Previous", role);
+    const newRole = e.target.value as Role;
+    const { role: originalRole, _id } = userDetails;
+    
+    if (newRole !== originalRole) {
+      changedUsersCtx.addUser(_id, newRole);
+    } else {
+      changedUsersCtx.removeUser(_id);
+    }
   };
 
   const usersDetails = useMemo(
     () =>
-      users?.map((user) => {
+      users?.map(({ _id, name, role, email }) => {
         return (
-          <tr className={classes.user} key={user._id}>
-            <td>{user.name}</td>
-            <td>{user.email}</td>
+          <tr className={classes.user} key={_id}>
+            <td>{name}</td>
+            <td>{email}</td>
             <td>
               <select
                 name="roles"
-                onChange={(e) => handleRoleChange(e, user.role)}
-                defaultValue={user.role}
+                onChange={(e) => handleRoleChange(e, { role, _id })}
+                defaultValue={role}
                 id="roles"
               >
                 {roles}

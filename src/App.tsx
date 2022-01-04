@@ -4,7 +4,7 @@ import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import AuthContext from "./contexts/auth-context";
 import { TilesContextProvider } from "./contexts/tiles-context";
-import { UsersContextProvider } from "./contexts/users-context";
+import { UsersContextProvider } from "./contexts/changed-users-context";
 import { combineComponents } from "./utils/CombineComponents";
 import "./App.scss";
 import { Role } from "./types/enum.role";

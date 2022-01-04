@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
 import { searchRoles } from "../components/Admin";
-import { User } from "../types/interface.user";
+import { User, userDetails } from "../types/interface.user";
 
 export interface Login {
   email: string;
@@ -9,6 +9,16 @@ export interface Login {
 
 export interface Signup extends Login {
   name: string;
+}
+
+const throwError = (error: any, defaultMsg: string) => {
+  if (axios.isAxiosError(error)) {
+    const msg = error.response?.data ?? defaultMsg;
+    throw new Error(msg);
+  }
+
+  throw new Error(defaultMsg);
+
 }
 
 const defaultApi = "http://localhost:8080";
@@ -44,7 +54,26 @@ const signup = async (values: Signup) => {
 };
 
 const users = {
-  getByRole: (async (role: searchRoles) => await (await axios.get(`${defaultApi}/user/role/${role}`)).data as User[])
+  getByRole: async (role: searchRoles) => {
+    try {
+      return (await (
+        await axios.get(`${defaultApi}/user/role/${role}`)
+      ).data) as User[];
+    } catch (error: any) {
+      const defaultMsg = `Could not get users with Role ${role}`;
+
+      if (axios.isAxiosError(error)) {
+        const msg = error.response?.data ?? defaultMsg;
+        throw new Error(msg);
+      }
+  
+      throw new Error(defaultMsg);
+    }
+  },
+  changeRoles: async (userDetails: userDetails[]) =>
+    await (
+      await axios.patch(`${defaultApi}/user/role`, userDetails)
+    ).data,
 };
 
 export { login, signup, users };
