@@ -1,0 +1,19 @@
+.grid {
+  overflow-y: auto;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  padding: {
+    block: 3rem;
+    inline: 1rem
+  }
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-auto-rows: 19rem;
+  gap: 4rem;
+}
