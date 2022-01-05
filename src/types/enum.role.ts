@@ -5,13 +5,13 @@ export enum Role {
   Viewer = "Viewer",
 }
 
-export enum NRole {
+enum NRole {
   Admin,
   Moderator,
   Editor,
   Viewer,
 }
 
-export function toNumber(role: Role) {
+export function roleToNumber(role: Role) {
   return NRole[role];
 }
