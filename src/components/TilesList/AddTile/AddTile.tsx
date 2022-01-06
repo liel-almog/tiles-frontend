@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import TilesContext from "../../../contexts/tiles-context";
 import classes from "./add-tile.module.scss";
+import { ObjectId } from "bson";
 
 export interface AddTileProps {}
 
@@ -13,7 +14,8 @@ export const AddTile: React.VFC<AddTileProps> = () => {
   };
 
   const handleColorClick = (color: string) => {
-    addTile({ color });
+    const _id = new ObjectId()
+    addTile({ _id, color });
     setAdd(false);
   };
 
