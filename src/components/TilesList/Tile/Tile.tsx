@@ -30,6 +30,7 @@ export const Tile: React.VFC<TileProps> = (props) => {
     })
     .map((color) => (
       <button
+        key={color}
         onClick={(e) => handleUpdateTile(color)}
         style={{ backgroundColor: color }}
         className={classes.colorBox}
