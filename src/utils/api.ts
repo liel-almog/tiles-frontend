@@ -1,5 +1,7 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
+import { ObjectId } from "bson";
 import { searchRoles } from "../components/Admin";
+import { Tile } from "../types/interface.tile";
 import { User, userDetails } from "../types/interface.user";
 
 export interface Login {
@@ -18,8 +20,7 @@ const throwError = (error: any, defaultMsg: string) => {
   }
 
   throw new Error(defaultMsg);
-
-}
+};
 
 const defaultApi = "http://localhost:8080";
 
@@ -66,7 +67,7 @@ const users = {
         const msg = error.response?.data ?? defaultMsg;
         throw new Error(msg);
       }
-  
+
       throw new Error(defaultMsg);
     }
   },
@@ -76,4 +77,21 @@ const users = {
     ).data,
 };
 
-export { login, signup, users };
+type updateTiles = { added: Tile[]; deleted: ObjectId[]; changed: Tile[] };
+const tiles = {
+  insertMany: async (tiles: Tile[]) => {
+    return await (
+      await axios.post(`${defaultApi}/tile`, tiles)
+    ).data;
+  },
+  getAll: async () => {
+    return await (
+      await axios.get(`${defaultApi}/tile`)
+    ).data;
+  },
+  updateAll: async (updateTiles: updateTiles) => {
+    axios.patch(`${defaultApi}/tile/all`, updateTiles);
+  },
+};
+
+export { login, signup, users, tiles };
