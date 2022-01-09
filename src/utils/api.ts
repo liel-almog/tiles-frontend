@@ -1,17 +1,9 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
 import { ObjectId } from "bson";
 import { searchRoles } from "../components/Admin";
+import { Login, Signup } from "../types/auth.interface";
 import { Tile } from "../types/tile.interface";
 import { User, userDetails } from "../types/user.interface";
-
-export interface Login {
-  email: string;
-  password: string;
-}
-
-export interface Signup extends Login {
-  name: string;
-}
 
 const throwError = (error: any, defaultMsg: string) => {
   if (axios.isAxiosError(error)) {
