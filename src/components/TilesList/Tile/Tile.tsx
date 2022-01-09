@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../../contexts/auth-context";
 import TilesContext from "../../../contexts/tiles-context";
 import { Tile as TileModel } from "../../../types/tile.interface";
@@ -19,6 +19,10 @@ export const Tile: React.VFC<TileProps> = (props) => {
     updateTile({ ...tile, color });
     setBackgroundColor(color);
   };
+
+  useEffect(() => {
+    setBackgroundColor(props.tile.color);
+  }, [props.tile.color]);
 
   const handleRemoveTile = () => {
     removeTile(props.tile._id);
