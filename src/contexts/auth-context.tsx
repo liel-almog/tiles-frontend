@@ -2,7 +2,7 @@ import { AxiosResponse } from "axios";
 import React, { useState, useEffect } from "react";
 import { login, Login } from "../utils/api";
 import { useLocalStorage } from "../utils/localStorage";
-import { User } from "../types/interface.user";
+import { User } from "../types/user.interface";
 
 interface AuthContextArgs {
   user: Partial<User>;

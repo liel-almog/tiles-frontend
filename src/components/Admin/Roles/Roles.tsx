@@ -1,5 +1,5 @@
 import classes from "./roles.module.scss";
-import { Role } from "../../../types/enum.role";
+import { Role } from "../../../types/role.enum";
 import { searchRoles } from "../Admin";
 import classNames from "classnames";
 

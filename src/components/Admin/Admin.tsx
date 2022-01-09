@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Role } from "../../types/enum.role";
+import { Role } from "../../types/role.enum";
 import classes from "./admin.module.scss";
 import { Roles } from "./Roles";
 import { Table } from "./Table";

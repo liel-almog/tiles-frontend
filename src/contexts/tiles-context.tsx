@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer, useState } from "react";
-import { Tile } from "../types/interface.tile";
+import { Tile } from "../types/tile.interface";
 import { ObjectId } from "bson";
 import { tiles as tilesApi } from "../utils/api";
 

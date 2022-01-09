@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { searchRoles } from "..";
-import { User } from "../../../types/interface.user";
+import { User } from "../../../types/user.interface";
 import {users as usersApi} from "../../../utils/api";
 import { UsersList } from "./UsersList";
 import classes from "./table.module.scss";

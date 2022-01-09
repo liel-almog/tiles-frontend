@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Role } from "../types/enum.role";
-import { userDetails } from "../types/interface.user";
+import { Role } from "../types/role.enum";
+import { userDetails } from "../types/user.interface";
 import { users } from "../utils/api";
 
 interface UsersContextArgs {

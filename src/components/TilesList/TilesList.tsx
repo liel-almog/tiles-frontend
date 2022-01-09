@@ -2,7 +2,7 @@ import classes from "./tiles-list.module.scss";
 import { Tile } from "./Tile";
 import { AddTile } from "./AddTile";
 import AuthContext from "../../contexts/auth-context";
-import { Role, roleToNumber } from "../../types/enum.role";
+import { Role, roleToNumber } from "../../types/role.enum";
 import { useContext } from "react";
 import TilesContext from "../../contexts/tiles-context";
 

@@ -1,6 +1,6 @@
 import { useContext, useMemo } from "react";
-import { Role } from "../../../../types/enum.role";
-import { User, userDetails } from "../../../../types/interface.user";
+import { Role } from "../../../../types/role.enum";
+import { User, userDetails } from "../../../../types/user.interface";
 import classes from "./users-list.module.scss";
 import UsersContext from "../../../../contexts/changed-users-context";
 export interface UsersListProps {
