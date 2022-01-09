@@ -1,8 +1,10 @@
 import { AxiosResponse } from "axios";
-import React, { useState, useEffect } from "react";
-import { login, Login } from "../utils/api";
+import React, { useEffect, useState } from "react";
+import { login } from "../utils/api";
 import { useLocalStorage } from "../utils/localStorage";
 import { User } from "../types/user.interface";
+import { Login } from "../types/auth.interface";
+import jwtDecode from "jwt-decode";
 
 interface AuthContextArgs {
   user: Partial<User>;
@@ -15,7 +17,7 @@ const AuthContext = React.createContext<AuthContextArgs>({
   user: {},
   isLoggedIn: false,
   onLogout: () => {},
-  onLogin: (values) => new Promise((res, rej) => res("")),
+  onLogin: () => new Promise((res, rej) => res("")),
 });
 
 interface AuthContextProviderProps {}
@@ -24,7 +26,14 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = (
   props
 ) => {
   const [isLoggedIn, setIsLoggedIn] = useLocalStorage("isLoggedIn", false);
-  const [user, setUser] = useLocalStorage<Partial<User>>("user", {});
+  const [token, setToken] = useLocalStorage("token", "");
+  const [user, setUser] = useState<Partial<User>>(() => {
+    if (token) {
+      return jwtDecode(token);
+    } else {
+      return {};
+    }
+  });
 
   const logoutHandler = () => {
     setUser({});
@@ -33,11 +42,12 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = (
 
   const loginHandler = async (values: Login) => {
     try {
-      const res: AxiosResponse<{ user: User; message: string }> = await login(
-        values
-      );
-      const { user, message } = res.data;
+      const res: AxiosResponse<{ message: string; token: string }> =
+        await login(values);
+      const { token, message } = res.data;
+      const user = jwtDecode(token) as User;
       setUser(user);
+      setToken(token);
       setIsLoggedIn(true);
       return message;
     } catch (error: any) {

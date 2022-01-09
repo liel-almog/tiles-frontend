@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import AuthContext from "../../contexts/auth-context";
 import classNames from "classnames";
 
@@ -10,13 +10,19 @@ export interface NavbarProps {}
 export const Navbar: React.VFC<NavbarProps> = () => {
   const { user } = useContext(AuthContext);
   const { onLogout } = useContext(AuthContext);
+  const navigate = useNavigate()
 
   const navClasses = ({ isActive }: { isActive: boolean }) =>
     `${isActive ? classes.active : ""} ${classes.vertical}`;
 
+  const handleLogoutClick = () => {
+    onLogout()
+    navigate('/login')
+  }
+
   return (
     <nav className={classes.nav}>
-      <section className={classes.user} onClick={onLogout}>
+      <section className={classes.user} onClick={handleLogoutClick}>
         <img src="/src/public/user.svg" alt="user" className={classes.img} />
         <article className={classes.info}>
           <b className={classes.name}>{user.name}</b>

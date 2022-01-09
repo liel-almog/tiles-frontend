@@ -11,17 +11,10 @@ import { Role } from "./types/role.enum";
 
 function App() {
   const authCtx = useContext(AuthContext);
-  const navigate = useNavigate();
   const AppContextProvider = combineComponents(
     UsersContextProvider,
     TilesContextProvider
   );
-
-  useEffect(() => {
-    if (!authCtx.isLoggedIn) {
-      navigate("/login");
-    }
-  }, [authCtx.isLoggedIn]);
 
   return (
     <>
