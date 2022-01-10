@@ -5,6 +5,8 @@ import { useLocalStorage } from "../utils/localStorage";
 import { User } from "../types/user.interface";
 import { Login } from "../types/auth.interface";
 import jwtDecode from "jwt-decode";
+import Cookies from "js-cookie";
+import ms from "ms";
 
 interface AuthContextArgs {
   user: Partial<User>;
@@ -25,8 +27,12 @@ interface AuthContextProviderProps {}
 export const AuthContextProvider: React.FC<AuthContextProviderProps> = (
   props
 ) => {
-  const [isLoggedIn, setIsLoggedIn] = useLocalStorage("isLoggedIn", false);
-  const [token, setToken] = useLocalStorage("token", "");
+  const [token, setToken] = useState(() => {
+    return Cookies.get("token");
+  });
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    return !!token;
+  });
   const [user, setUser] = useState<Partial<User>>(() => {
     if (token) {
       return jwtDecode(token);
@@ -38,17 +44,18 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = (
   const logoutHandler = () => {
     setUser({});
     setIsLoggedIn(false);
+    setToken("");
+    Cookies.remove("token");
   };
 
   const loginHandler = async (values: Login) => {
     try {
-      const res: AxiosResponse<{ message: string; token: string }> =
-        await login(values);
-      const { token, message } = res.data;
+      const { token, message } = await login(values);
       const user = jwtDecode(token) as User;
       setUser(user);
       setToken(token);
       setIsLoggedIn(true);
+      Cookies.set("token", token, { expires: ms("1 day") });
       return message;
     } catch (error: any) {
       throw new Error(error.message);

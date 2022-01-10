@@ -5,44 +5,39 @@ import { Login, Signup } from "../types/auth.interface";
 import { Tile } from "../types/tile.interface";
 import { User, userDetails } from "../types/user.interface";
 
-const throwError = (error: any, defaultMsg: string) => {
+const returnError = (error: any, defaultMsg: string) => {
   if (axios.isAxiosError(error)) {
     const msg = error.response?.data ?? defaultMsg;
-    throw new Error(msg);
+    return Error(msg);
   }
 
-  throw new Error(defaultMsg);
+  return Error(defaultMsg);
 };
 
-const defaultApi = "http://localhost:8080";
+const instance = axios.create({
+  baseURL: "http://localhost:8080",
+  withCredentials: true,
+});
 
 const login = async (values: Login) => {
   try {
-    return await axios.post(`${defaultApi}/auth/login`, values);
+    return (await (
+      await instance.post("/auth/login", values)
+    ).data) as { token: string; message: string };
   } catch (error: any) {
     const defaultMsg = "Could not log you in";
 
-    if (axios.isAxiosError(error)) {
-      const msg = error.response?.data ?? defaultMsg;
-      throw new Error(msg);
-    }
-
-    throw new Error(defaultMsg);
+    throw returnError(error, defaultMsg);
   }
 };
 
 const signup = async (values: Signup) => {
   try {
-    return await axios.post(`${defaultApi}/auth/signup`, values);
+    return await instance.post("/auth/signup", values);
   } catch (error: any) {
     const defaultMsg = "Could not create user";
 
-    if (axios.isAxiosError(error)) {
-      const msg = error.response?.data ?? defaultMsg;
-      throw new Error(msg);
-    }
-
-    throw new Error(defaultMsg);
+    throw returnError(error, defaultMsg);
   }
 };
 
@@ -50,39 +45,46 @@ const users = {
   getByRole: async (role: searchRoles) => {
     try {
       return (await (
-        await axios.get(`${defaultApi}/user/role/${role}`)
+        await instance.get(`/user/role/${role}`)
       ).data) as User[];
     } catch (error: any) {
       const defaultMsg = `Could not get users with Role ${role}`;
 
-      if (axios.isAxiosError(error)) {
-        const msg = error.response?.data ?? defaultMsg;
-        throw new Error(msg);
-      }
-
-      throw new Error(defaultMsg);
+      throw returnError(error, defaultMsg);
     }
   },
-  changeRoles: async (userDetails: userDetails[]) =>
-    await (
-      await axios.patch(`${defaultApi}/user/role`, userDetails)
-    ).data,
+  changeRoles: async (userDetails: userDetails[]) => {
+    try {
+      return await (
+        await instance.patch("/user/role", userDetails)
+      ).data
+    } catch (error: any) {
+      const defaultMsg = 'Could not change user roles'
+
+      throw returnError(error, defaultMsg)
+    }
+  }
+    
 };
 
 type updateTiles = { added: Tile[]; deleted: ObjectId[]; changed: Tile[] };
 const tiles = {
   insertMany: async (tiles: Tile[]) => {
-    return await (
-      await axios.post(`${defaultApi}/tile`, tiles)
-    ).data;
+    try {
+      return await (
+        await instance.post("tile", tiles)
+      ).data;
+    } catch (error: any) {
+      throw returnError(error, "Could not insert tiles");
+    }
   },
   getAll: async () => {
     return await (
-      await axios.get(`${defaultApi}/tile`)
+      await instance.get("/tile")
     ).data;
   },
   updateAll: async (updateTiles: updateTiles) => {
-    axios.patch(`${defaultApi}/tile/all`, updateTiles);
+    instance.patch("/tile/all", updateTiles);
   },
 };
 
