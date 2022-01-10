@@ -49,6 +49,9 @@ export const Signup: React.VFC<SignupProps> = () => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
+        {validation.name && (
+          <p className={classes.errorMsg}>{formik.errors.name}</p>
+        )}
       </section>
 
       <section className={classes.formGroup}>
@@ -62,6 +65,9 @@ export const Signup: React.VFC<SignupProps> = () => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
+        {validation.email && (
+          <p className={classes.errorMsg}>{formik.errors.email}</p>
+        )}
       </section>
       <section className={classes.formGroup}>
         <input
@@ -74,6 +80,9 @@ export const Signup: React.VFC<SignupProps> = () => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
+        {validation.password && (
+          <p className={classes.errorMsg}>{formik.errors.password}</p>
+        )}
       </section>
 
       <button className={classes.activeBtn} type="submit">

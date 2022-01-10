@@ -25,7 +25,7 @@ export const Login: React.VFC<LoginProps> = () => {
     },
 
     onSubmit: authCtx.onLogin,
-    validationSchema: LoginSchema
+    validationSchema: LoginSchema,
   });
 
   const validation = {
@@ -43,24 +43,34 @@ export const Login: React.VFC<LoginProps> = () => {
           type="email"
           name="email"
           id="email"
-          className={classNames(classes.input, {[classes.error]: validation.email})}
+          className={classNames(classes.input, {
+            [classes.error]: validation.email,
+          })}
           placeholder="Email"
           value={formik.values.email}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
+        {validation.email && (
+          <p className={classes.errorMsg}>{formik.errors.email}</p>
+        )}
       </section>
       <section className={classes.formGroup}>
         <input
           type="password"
           name="password"
           id="password"
-          className={classNames(classes.input, {[classes.error]: validation.password})}
+          className={classNames(classes.input, {
+            [classes.error]: validation.password,
+          })}
           placeholder="Password"
           value={formik.values.password}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
+        {validation.password && (
+          <p className={classes.errorMsg}>{formik.errors.password}</p>
+        )}
       </section>
 
       <article className={classes.groupBtn}>

@@ -21,7 +21,7 @@
     .input {
       background-color: #ecf4ff;
       width: 100%;
-      padding: 0.9rem;
+      padding: 1rem;
       box-sizing: border-box;
       font-size: 1.2rem;
       border-radius: 12px;
@@ -30,6 +30,14 @@
     .error {
       border: 2px solid rgba(255, 47, 47, 0.568);
       outline: transparent;
+    }
+
+    .errorMsg {
+      color: #FEF1E6;
+      margin: 0;
+      padding: 0.5rem;
+      padding-bottom: 0rem;
+      box-sizing: border-box;
     }
 
     .activeBtn {
