@@ -16,8 +16,23 @@ const returnError = (error: any, defaultMsg: string) => {
   return Error(defaultMsg);
 };
 
+const baseURL =
+  process.env.NODE_ENV === "production"
+    ? "https://tile-backend.herokuapp.com/"
+    : "http://localhost:8080";
+
+if (process.env.BACKEND_URL) {
+  console.log(process.env.BACKEND_URL, "backend");
+} else {
+  console.log("No backend");
+  console.log(baseURL);
+  console.log(process.env.BACKEND_URL);
+
+  console.log(process.env.NODE_ENV);
+}
+
 const instance = axios.create({
-  baseURL: "http://localhost:8080",
+  baseURL,
   withCredentials: true,
 });
 
@@ -94,4 +109,3 @@ const tiles = {
 };
 
 export { login, signup, users, tiles };
-

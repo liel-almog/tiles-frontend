@@ -1,0 +1,15 @@
+{
+    "rewrites": [
+      {
+        "source": "/:path*",
+        "has": [
+          {
+            "type": "host",
+            "value": "tiles-frontend-5ofnsxedn-liel-almog.vercel.app"
+          }
+        ],
+        "destination": "/app/:path*"
+      }
+    ]
+  }
+  
