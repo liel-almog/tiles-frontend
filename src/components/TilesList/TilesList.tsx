@@ -1,10 +1,10 @@
-import classes from "./tiles-list.module.scss";
-import { Tile } from "./Tile";
-import { AddTile } from "./AddTile";
-import AuthContext from "../../contexts/auth-context";
-import { Role, roleToNumber } from "../../types/role.enum";
 import { useContext } from "react";
+import AuthContext from "../../contexts/auth-context";
 import TilesContext from "../../contexts/tiles-context";
+import { Role, roleToNumber } from "../../types/role.enum";
+import { AddTile } from "./AddTile";
+import { Tile } from "./Tile";
+import classes from "./tiles-list.module.scss";
 
 export interface TilesListProps {}
 

@@ -1,9 +1,9 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { searchRoles } from "..";
 import { User } from "../../../types/user.interface";
-import {users as usersApi} from "../../../utils/api";
-import { UsersList } from "./UsersList";
+import { users as usersApi } from "../../../utils/api";
 import classes from "./table.module.scss";
+import { UsersList } from "./UsersList";
 
 export interface TableProps {
   role: searchRoles;

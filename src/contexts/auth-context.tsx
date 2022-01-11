@@ -1,12 +1,10 @@
-import { AxiosResponse } from "axios";
-import React, { useEffect, useState } from "react";
-import { login } from "../utils/api";
-import { useLocalStorage } from "../utils/localStorage";
-import { User } from "../types/user.interface";
-import { Login } from "../types/auth.interface";
-import jwtDecode from "jwt-decode";
 import Cookies from "js-cookie";
+import jwtDecode from "jwt-decode";
 import ms from "ms";
+import React, { useState } from "react";
+import { Login } from "../types/auth.interface";
+import { User } from "../types/user.interface";
+import { login } from "../utils/api";
 
 interface AuthContextArgs {
   user: Partial<User>;

@@ -1,7 +1,7 @@
-import classes from "./roles.module.scss";
+import classNames from "classnames";
 import { Role } from "../../../types/role.enum";
 import { searchRoles } from "../Admin";
-import classNames from "classnames";
+import classes from "./roles.module.scss";
 
 export interface RolesProps {
   setRole: React.Dispatch<React.SetStateAction<searchRoles>>;

@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosResponse } from "axios";
+import axios from "axios";
 import { ObjectId } from "bson";
 import { searchRoles } from "../components/Admin";
 import { Login, Signup } from "../types/auth.interface";
@@ -94,3 +94,4 @@ const tiles = {
 };
 
 export { login, signup, users, tiles };
+

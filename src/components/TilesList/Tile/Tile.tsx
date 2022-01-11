@@ -2,9 +2,9 @@ import classNames from "classnames";
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../../contexts/auth-context";
 import TilesContext from "../../../contexts/tiles-context";
+import { Role, roleToNumber } from "../../../types/role.enum";
 import { Tile as TileModel } from "../../../types/tile.interface";
 import classes from "./tile.module.scss";
-import { roleToNumber, Role } from "../../../types/role.enum";
 
 export interface TileProps {
   tile: TileModel;

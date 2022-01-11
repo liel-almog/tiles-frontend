@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import AuthContext from "../../contexts/auth-context";
 import { Swal } from "../../utils/alert";
-
 import classes from "./navbar.module.scss";
+
 
 export interface NavbarProps {}
 

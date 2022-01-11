@@ -1,10 +1,10 @@
-import classes from "./signup.module.scss";
 import classNames from "classnames";
-import { signup } from "../../../utils/api";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
-import { SignupSchema } from "./validation";
 import { Swal } from "../../../utils/alert";
+import { signup } from "../../../utils/api";
+import classes from "./signup.module.scss";
+import { SignupSchema } from "./validation";
 
 export interface SignupProps {}
 

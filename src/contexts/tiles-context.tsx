@@ -1,8 +1,8 @@
-import React, { useEffect, useReducer, useState } from "react";
-import { Tile } from "../types/tile.interface";
 import { ObjectId } from "bson";
-import { tiles as tilesApi } from "../utils/api";
+import React, { useEffect, useReducer } from "react";
+import { Tile } from "../types/tile.interface";
 import { Swal } from "../utils/alert";
+import { tiles as tilesApi } from "../utils/api";
 
 interface TilesContextArgs {
   colors: string[];

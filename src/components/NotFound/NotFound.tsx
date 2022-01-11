@@ -1,5 +1,3 @@
-import classes from "./not-found.module.scss";
-
 export interface NotFoundProps {}
 
 export const NotFound: React.VFC<NotFoundProps> = () => {

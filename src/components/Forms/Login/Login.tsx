@@ -1,11 +1,11 @@
-import classes from "./login.module.scss";
-import { LoginSchema } from "./validation";
-import { useContext, useEffect } from "react";
+import classNames from "classnames";
 import { useFormik } from "formik";
+import { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../../../contexts/auth-context";
-import classNames from "classnames";
 import { Swal } from "../../../utils/alert";
+import classes from "./login.module.scss";
+import { LoginSchema } from "./validation";
 
 export interface LoginProps {}
 
