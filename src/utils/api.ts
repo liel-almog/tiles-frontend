@@ -88,7 +88,7 @@ const tiles = {
   },
   updateAll: async (updateTiles: updateTiles) => {
     return (await (
-      await instance.patch("/tile/all", updateTiles)
+      await instance.patch("/tile", updateTiles)
     ).data) as withMessage;
   },
 };
