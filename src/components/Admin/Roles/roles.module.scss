@@ -2,12 +2,16 @@ h1 {
   margin: 0;
 }
 
-.col {
+.container {
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: flex-start;
   width: 80%;
+  gap: 0.7rem;
+  padding-top: 1rem;
+  box-sizing: border-box;
+  color: #ecf4ff;
 
   .header {
     color: #ecf4ff;
@@ -23,19 +27,32 @@ h1 {
     border-bottom: 3px solid #ecf4ff;
   }
 
-  .roles {
-    display: flex;
-    flex-direction: column;
-    gap: 0.7rem;
-    padding-top: 1rem;
-    box-sizing: border-box;
-    color: #ecf4ff;
-  }
-
   .role {
     background-color: transparent;
     font-size: xx-large;
     text-align: left;
     font-weight: 500;
+  }
+
+  @media (max-width: 992px) {
+    .role,
+    .header {
+      font-size: medium;
+    }
+
+    .roles {
+      flex-direction: row;
+      justify-content: space-around;
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .container {
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    width: 100%;
   }
 }

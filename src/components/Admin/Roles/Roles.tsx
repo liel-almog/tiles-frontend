@@ -33,7 +33,7 @@ export const Roles: React.VFC<RolesProps> = (props) => {
   ));
 
   return (
-    <div className={classes.col}>
+    <div className={classes.container}>
       <article>
         <button
           className={classNames(classes.header, active("All"))}
@@ -43,7 +43,8 @@ export const Roles: React.VFC<RolesProps> = (props) => {
           All Users
         </button>
       </article>
-      <article className={classes.roles}>{roles}</article>
+      {/* <article className={classes.roles}>{roles}</article> */}
+      {roles}
     </div>
   );
 };

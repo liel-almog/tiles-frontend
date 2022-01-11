@@ -12,7 +12,7 @@ export const Admin: React.VFC<AdminProps> = () => {
   const [role, setRole] = useState<searchRoles>("All");
 
   return (
-    <div className={classes.row}>
+    <div className={classes.container}>
       <section className={classes.userRoles}>
         <Roles role={role} setRole={setRole}></Roles>
       </section>
