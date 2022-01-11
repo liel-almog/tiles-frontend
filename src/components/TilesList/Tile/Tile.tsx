@@ -51,7 +51,7 @@ export const Tile: React.VFC<TileProps> = (props) => {
               onClick={handleRemoveTile}
               className={classNames(classes.colorBox, classes.remove)}
             >
-              <img src="/src/public/trash.svg" alt="" />
+              <img src="/trash.svg" alt="" />
             </button>
           )}
         </section>

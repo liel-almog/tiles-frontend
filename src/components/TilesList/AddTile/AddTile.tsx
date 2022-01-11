@@ -35,7 +35,7 @@ export const AddTile: React.VFC<AddTileProps> = () => {
       {add && <section className={classes.colors}>{coloredBoxes}</section>}
       {!add && (
         <button onClick={handleAddClick}>
-          <img src="/src/public/plus.svg" alt="plus" />
+          <img src="/plus.svg" alt="plus" />
         </button>
       )}
     </section>
