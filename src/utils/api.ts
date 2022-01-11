@@ -4,11 +4,13 @@ import { searchRoles } from "../components/Admin";
 import { Login, Signup } from "../types/auth.interface";
 import { Tile } from "../types/tile.interface";
 import { User, userDetails } from "../types/user.interface";
+type withMessage = { message: string };
 
 const returnError = (error: any, defaultMsg: string) => {
   if (axios.isAxiosError(error)) {
-    const msg = error.response?.data ?? defaultMsg;
-    return Error(msg);
+    const messege = error.response?.data ?? defaultMsg;
+    // const err = {status: error.response?.status, messege}
+    return Error(messege);
   }
 
   return Error(defaultMsg);
@@ -23,7 +25,7 @@ const login = async (values: Login) => {
   try {
     return (await (
       await instance.post("/auth/login", values)
-    ).data) as { token: string; message: string };
+    ).data) as withMessage & { token: string };
   } catch (error: any) {
     const defaultMsg = "Could not log you in";
 
@@ -33,7 +35,9 @@ const login = async (values: Login) => {
 
 const signup = async (values: Signup) => {
   try {
-    return await instance.post("/auth/signup", values);
+    return (await (
+      await instance.post("/auth/signup", values)
+    ).data) as withMessage;
   } catch (error: any) {
     const defaultMsg = "Could not create user";
 
@@ -55,16 +59,15 @@ const users = {
   },
   changeRoles: async (userDetails: userDetails[]) => {
     try {
-      return await (
+      return (await (
         await instance.patch("/user/role", userDetails)
-      ).data
+      ).data) as withMessage;
     } catch (error: any) {
-      const defaultMsg = 'Could not change user roles'
+      const defaultMsg = "Could not change user roles";
 
-      throw returnError(error, defaultMsg)
+      throw returnError(error, defaultMsg);
     }
-  }
-    
+  },
 };
 
 type updateTiles = { added: Tile[]; deleted: ObjectId[]; changed: Tile[] };
@@ -79,12 +82,14 @@ const tiles = {
     }
   },
   getAll: async () => {
-    return await (
+    return (await (
       await instance.get("/tile")
-    ).data;
+    ).data) as Tile[];
   },
   updateAll: async (updateTiles: updateTiles) => {
-    instance.patch("/tile/all", updateTiles);
+    return (await (
+      await instance.patch("/tile/all", updateTiles)
+    ).data) as withMessage;
   },
 };
 

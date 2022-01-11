@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { useLocation } from "react-router-dom";
 import UsersContext from "../../contexts/changed-users-context";
 import TilesContext from "../../contexts/tiles-context";
+import { Swal } from "../../utils/alert";
 import classes from "./footer.module.scss";
 
 export interface FooterProps {}
@@ -13,18 +14,26 @@ export const Footer: React.VFC<FooterProps> = () => {
   const location = useLocation();
 
   const handleSaveClick = () => {
-    if (location.pathname === "/admin") {
-      changedUsersCtx.onSave();
-    } else if (location.pathname === "/") {
-      TilesCtx.onSave();
+    try {
+      if (location.pathname === "/admin") {
+        changedUsersCtx.onSave();
+      } else if (location.pathname === "/") {
+        TilesCtx.onSave();
+      }
+    } catch (error: any) {
+      Swal({ title: "Could not save changes", icon: "error" });
     }
   };
 
   const handleUndoClick = () => {
-    if (location.pathname === "/admin") {
-      changedUsersCtx.onUndo();
-    } else if (location.pathname === "/") {
-      TilesCtx.onUndo();
+    try {
+      if (location.pathname === "/admin") {
+        changedUsersCtx.onUndo();
+      } else if (location.pathname === "/") {
+        TilesCtx.onUndo();
+      }
+    } catch (error: any) {
+      Swal({ title: "Could not undo changes" });
     }
   };
 

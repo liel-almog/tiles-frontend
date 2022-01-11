@@ -7,6 +7,7 @@ import { TilesContextProvider } from "./contexts/tiles-context";
 import { UsersContextProvider } from "./contexts/changed-users-context";
 import { combineComponents } from "./utils/CombineComponents";
 import "./App.scss";
+import 'sweetalert2/src/sweetalert2.scss'
 import { Role } from "./types/role.enum";
 
 function App() {

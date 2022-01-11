@@ -1,9 +1,10 @@
 import classes from "./signup.module.scss";
-import classNames from 'classnames'
+import classNames from "classnames";
 import { signup } from "../../../utils/api";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { SignupSchema } from "./validation";
+import { Swal } from "../../../utils/alert";
 
 export interface SignupProps {}
 
@@ -20,10 +21,13 @@ export const Signup: React.VFC<SignupProps> = () => {
 
     onSubmit: async (values) => {
       try {
-        const res = await signup(values);
+        const { message } = await signup(values);
         navigate("/login");
       } catch (error: any) {
-        throw new Error("Could not sign you up");
+        // console.log();
+
+        Swal({ title: error.message, icon: "error" });
+        // throw new Error("Could not sign you up");
       }
     },
   });
@@ -43,7 +47,9 @@ export const Signup: React.VFC<SignupProps> = () => {
           type="text"
           name="name"
           id="name"
-          className={classNames(classes.input, {[classes.error]: validation.name})}
+          className={classNames(classes.input, {
+            [classes.error]: validation.name,
+          })}
           placeholder="Name"
           value={formik.values.name}
           onChange={formik.handleChange}
@@ -59,7 +65,9 @@ export const Signup: React.VFC<SignupProps> = () => {
           type="email"
           name="email"
           id="email"
-          className={classNames(classes.input, {[classes.error]: validation.email})}
+          className={classNames(classes.input, {
+            [classes.error]: validation.email,
+          })}
           placeholder="Email"
           value={formik.values.email}
           onChange={formik.handleChange}
@@ -74,7 +82,9 @@ export const Signup: React.VFC<SignupProps> = () => {
           type="password"
           name="password"
           id="password"
-          className={classNames(classes.input, {[classes.error]: validation.password})}
+          className={classNames(classes.input, {
+            [classes.error]: validation.password,
+          })}
           placeholder="Password"
           value={formik.values.password}
           onChange={formik.handleChange}

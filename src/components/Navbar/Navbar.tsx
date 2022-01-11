@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import AuthContext from "../../contexts/auth-context";
-import classNames from "classnames";
+import { Swal } from "../../utils/alert";
 
 import classes from "./navbar.module.scss";
 
@@ -10,15 +10,16 @@ export interface NavbarProps {}
 export const Navbar: React.VFC<NavbarProps> = () => {
   const { user } = useContext(AuthContext);
   const { onLogout } = useContext(AuthContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const navClasses = ({ isActive }: { isActive: boolean }) =>
     `${isActive ? classes.active : ""} ${classes.vertical}`;
 
   const handleLogoutClick = () => {
-    onLogout()
-    navigate('/login')
-  }
+    Swal({ title: "Successfully logged out", icon: 'success' });
+    onLogout();
+    navigate("/login");
+  };
 
   return (
     <nav className={classes.nav}>

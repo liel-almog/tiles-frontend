@@ -2,6 +2,7 @@ import React, { useEffect, useReducer, useState } from "react";
 import { Tile } from "../types/tile.interface";
 import { ObjectId } from "bson";
 import { tiles as tilesApi } from "../utils/api";
+import { Swal } from "../utils/alert";
 
 interface TilesContextArgs {
   colors: string[];
@@ -106,7 +107,7 @@ export const TilesContextProvider: React.FC<TilesContextProviderProps> = (
       const tileIndex = prevTiles.findIndex(
         (prevTile) => prevTile._id === tile._id
       );
-      const tiles = [...prevTiles]
+      const tiles = [...prevTiles];
       tiles[tileIndex].color = tile.color;
       const changed = prevChanged.concat(tile);
       return { tiles, changed };
@@ -119,11 +120,17 @@ export const TilesContextProvider: React.FC<TilesContextProviderProps> = (
     try {
       const modified = added.length || changed.length || deleted.length;
       if (modified) {
-        await tilesApi.updateAll({ added, changed, deleted });
+        const { message } = await tilesApi.updateAll({
+          added,
+          changed,
+          deleted,
+        });
+        Swal({ title: message, icon: "success" });
         dispatch({ type: "RESET" });
       }
     } catch (error: any) {
-      throw new Error("Could not update tiles");
+      Swal({ title: "Could not update tiles", icon: "error" });
+      // throw new Error("Could not update tiles");
     }
   };
 

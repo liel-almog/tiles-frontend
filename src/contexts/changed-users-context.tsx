@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Role } from "../types/role.enum";
 import { userDetails } from "../types/user.interface";
+import { Swal } from "../utils/alert";
 import { users } from "../utils/api";
 
 interface UsersContextArgs {
@@ -52,9 +53,9 @@ export const UsersContextProvider: React.FC<UsersContextProviderProps> = (
 
   const saveChangedUsersHanlder = async () => {
     if (changedUsers.length > 0) {
-      const res = await users.changeRoles(changedUsers);
+      const { message } = await users.changeRoles(changedUsers);
       setChangedUsers([]);
-      return res;
+      Swal({ title: message, icon: "success" });
     }
   };
 

@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../../../contexts/auth-context";
 import classNames from "classnames";
+import { Swal } from "../../../utils/alert";
 
 export interface LoginProps {}
 
@@ -24,7 +25,14 @@ export const Login: React.VFC<LoginProps> = () => {
       password: "",
     },
 
-    onSubmit: authCtx.onLogin,
+    onSubmit: async (values) => {
+      try {
+        const message = await authCtx.onLogin(values);
+        Swal({ title: message, icon: "success" });
+      } catch (error: any) {
+        Swal({ title: error.message, icon: "error", heightAuto: false });
+      }
+    },
     validationSchema: LoginSchema,
   });
 
