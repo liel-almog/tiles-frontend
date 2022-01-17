@@ -1,6 +1,5 @@
 import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
-import ms from "ms";
 import React, { useState } from "react";
 import { Login } from "../types/auth.interface";
 import { User } from "../types/user.interface";
@@ -53,7 +52,6 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = (
       setUser(user);
       setToken(token);
       setIsLoggedIn(true);
-      Cookies.set("token", token, { expires: ms("1 day") });
       return message;
     } catch (error: any) {
       throw new Error(error.message);

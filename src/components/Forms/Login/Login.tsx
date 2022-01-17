@@ -43,7 +43,7 @@ export const Login: React.VFC<LoginProps> = () => {
 
   return (
     <form onSubmit={formik.handleSubmit} className={classes.form}>
-      <img src="/src/public/user.svg" alt="profile image" />
+      <img src="/user.svg" alt="profile image" />
       <h1>Login</h1>
 
       <section className={classes.formGroup}>
