@@ -50,7 +50,7 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = (
       const { token, message } = await login(values);
       const user = jwtDecode(token) as User;
       setUser(user);
-      setToken(`Bearer ${token}`);
+      setToken(token);
       setIsLoggedIn(true);
       Cookies.set('token', token)
       return message;

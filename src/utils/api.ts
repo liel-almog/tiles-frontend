@@ -25,6 +25,7 @@ const baseURL =
 
 const token = Cookies.get('token')!
 
+
 const instance = axios.create({
   baseURL,
   withCredentials: true,
