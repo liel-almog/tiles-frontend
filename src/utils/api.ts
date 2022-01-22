@@ -1,9 +1,11 @@
 import axios from "axios";
 import { ObjectId } from "bson";
+import Cookies from "js-cookie";
 import { searchRoles } from "../components/Admin";
 import { Login, Signup } from "../types/auth.interface";
 import { Tile } from "../types/tile.interface";
 import { User, userDetails } from "../types/user.interface";
+
 type withMessage = { message: string };
 
 const returnError = (error: any, defaultMsg: string) => {
@@ -21,9 +23,12 @@ const baseURL =
     ? "https://tile-backend.herokuapp.com/"
     : "http://localhost:8080";
 
+const token = Cookies.get('token')!
+
 const instance = axios.create({
   baseURL,
   withCredentials: true,
+  headers: { Authorization: `Bearer ${token}` },
 });
 
 const login = async (values: Login) => {
@@ -99,3 +104,4 @@ const tiles = {
 };
 
 export { login, signup, users, tiles };
+
