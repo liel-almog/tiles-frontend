@@ -1,6 +1,6 @@
 import { ObjectId } from "bson";
 
 export interface Tile {
-  _id: ObjectId;
+  id: ObjectId;
   color: string;
 }

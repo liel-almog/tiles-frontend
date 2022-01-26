@@ -8,7 +8,7 @@ interface TilesContextArgs {
   colors: string[];
   tiles: Tile[];
   addTile: (t: Tile) => void;
-  removeTile: (_id: ObjectId) => void;
+  removeTile: (id: ObjectId) => void;
   updateTile: (t: Tile) => void;
   onSave: () => void;
   onUndo: () => void;
@@ -92,10 +92,10 @@ export const TilesContextProvider: React.FC<TilesContextProviderProps> = (
     dispatch({ type: "ADD", add });
   };
 
-  const removeTile = (_id: ObjectId) => {
+  const removeTile = (id: ObjectId) => {
     const remove: remove = (prevTiles, prevDeleted) => {
-      const deleted = prevDeleted.concat(_id);
-      const tiles = prevTiles.filter((tile) => tile._id !== _id);
+      const deleted = prevDeleted.concat(id);
+      const tiles = prevTiles.filter((tile) => tile.id !== id);
       return { tiles, deleted };
     };
 
@@ -105,7 +105,7 @@ export const TilesContextProvider: React.FC<TilesContextProviderProps> = (
   const updateTile = (tile: Tile) => {
     const change: change = (prevTiles, prevChanged) => {
       const tileIndex = prevTiles.findIndex(
-        (prevTile) => prevTile._id === tile._id
+        (prevTile) => prevTile.id === tile.id
       );
       const tiles = [...prevTiles];
       tiles[tileIndex].color = tile.color;

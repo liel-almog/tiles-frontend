@@ -21,26 +21,26 @@ export const UsersList: React.VFC<UsersListProps> = ({ users }) => {
     userDetails: userDetails
   ) => {
     const newRole = e.target.value as Role;
-    const { role: originalRole, _id } = userDetails;
+    const { role: originalRole, id } = userDetails;
     
     if (newRole !== originalRole) {
-      changedUsersCtx.addUser(_id, newRole);
+      changedUsersCtx.addUser(id, newRole);
     } else {
-      changedUsersCtx.removeUser(_id);
+      changedUsersCtx.removeUser(id);
     }
   };
 
   const usersDetails = useMemo(
     () =>
-      users?.map(({ _id, name, role, email }) => {
+      users?.map(({ id, name, role, email }) => {
         return (
-          <tr className={classes.user} key={_id}>
+          <tr className={classes.user} key={id}>
             <td>{name}</td>
             <td>{email}</td>
             <td>
               <select
                 name="roles"
-                onChange={(e) => handleRoleChange(e, { role, _id })}
+                onChange={(e) => handleRoleChange(e, { role, id })}
                 defaultValue={role}
                 id="roles"
               >

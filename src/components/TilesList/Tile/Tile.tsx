@@ -25,7 +25,7 @@ export const Tile: React.VFC<TileProps> = (props) => {
   }, [props.tile.color]);
 
   const handleRemoveTile = () => {
-    removeTile(props.tile._id);
+    removeTile(props.tile.id);
   };
 
   const leftColors = colors

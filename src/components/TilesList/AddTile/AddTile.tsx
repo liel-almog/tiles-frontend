@@ -14,8 +14,8 @@ export const AddTile: React.VFC<AddTileProps> = () => {
   };
 
   const handleColorClick = (color: string) => {
-    const _id = new ObjectId()
-    addTile({ _id, color });
+    const id = new ObjectId()
+    addTile({ id, color });
     setAdd(false);
   };
 

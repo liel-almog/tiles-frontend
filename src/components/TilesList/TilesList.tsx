@@ -15,7 +15,7 @@ export const TilesList: React.VFC<TilesListProps> = () => {
 
   const tilesCtx = useContext(TilesContext);
   const tiles = tilesCtx.tiles.map((tile) => {
-    return <Tile tile={tile} key={tile._id.toString()}></Tile>;
+    return <Tile tile={tile} key={tile.id.toString()}></Tile>;
   });
 
   return (

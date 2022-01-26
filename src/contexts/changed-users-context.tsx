@@ -6,8 +6,8 @@ import { users } from "../utils/api";
 
 interface UsersContextArgs {
   changedUsers: Partial<userDetails[]>;
-  addUser: (_id: string, r: Role) => void;
-  removeUser: (_id: string) => void;
+  addUser: (id: string, r: Role) => void;
+  removeUser: (id: string) => void;
   onSave: () => void;
   onUndo: () => void;
 }
@@ -27,10 +27,10 @@ export const UsersContextProvider: React.FC<UsersContextProviderProps> = (
 ) => {
   const [changedUsers, setChangedUsers] = useState<userDetails[]>([]);
 
-  const addUser = (_id: string, role: Role) => {
-    const user = { _id, role };
+  const addUser = (id: string, role: Role) => {
+    const user = { id, role };
     setChangedUsers((users) => {
-      const userIndex = users.findIndex((user) => user._id === _id);
+      const userIndex = users.findIndex((user) => user.id === id);
       if (userIndex === -1) {
         return [...users, user];
       } else {
@@ -39,9 +39,9 @@ export const UsersContextProvider: React.FC<UsersContextProviderProps> = (
       }
     });
   };
-  const removeUser = (_id: string) => {
+  const removeUser = (id: string) => {
     setChangedUsers((users) => {
-      const userIndex = users.findIndex((user) => user._id === _id);
+      const userIndex = users.findIndex((user) => user.id === id);
 
       if (userIndex !== -1) {
         users.splice(userIndex, 1);
