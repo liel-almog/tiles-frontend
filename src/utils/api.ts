@@ -73,6 +73,17 @@ const users = {
       throw returnError(error, defaultMsg);
     }
   },
+  getAll: async () => {
+    try {
+      return (await (
+        await instance.get("/user")
+      ).data) as User[];
+    } catch (error: any) {
+      const defaultMsg = `Could not get users`;
+
+      throw returnError(error, defaultMsg);
+    }
+  },
 };
 
 type updateTiles = { added: Tile[]; deleted: ObjectId[]; changed: Tile[] };

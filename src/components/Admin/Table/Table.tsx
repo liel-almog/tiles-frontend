@@ -15,7 +15,11 @@ export const Table: React.VFC<TableProps> = (props) => {
 
   useEffect(() => {
     (async () => {
-      setUsers(await usersApi.getByRole(role));
+      if (role === "All") {
+        setUsers(await usersApi.getAll());
+      } else {
+        setUsers(await usersApi.getByRole(role));
+      }
     })();
   }, [role]);
 
